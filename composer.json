@@ -1,0 +1,16 @@
+{
+  "name": "digipolisgent/openbib-id-api-examples",
+  "description": "Usage examples for digipolisgent/openbib-id-api",
+  "minimum-stability": "dev",
+  "require": {
+    "digipolisgent/openbib-id-api": "^1.0@alpha",
+    "luminous/luminous": "^0.7.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jelle Sebreghts",
+      "email": "sebreghts.jelle@gmail.com"
+    }
+  ]
+}
