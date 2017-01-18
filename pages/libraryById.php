@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../init.php';
-$client = new OpenBibIdApi\BibConsumer(CONSUMER_KEY, CONSUMER_SECRET, CURRENT_ENV);
+require_once __DIR__ . '/../bootstrap.php';
+$libraryService = new OpenBibIdApi\Service\LibraryService($consumer);
 
 if (!isset($_GET['library_id'])) {
-  $list = $client->library()->getLibraryList();
+  $list = $libraryService->getLibraryList();
   $form = '<form method="GET" action="/pages/' . basename(__FILE__) . '?' . http_build_query($_GET) . '">';
   $form .= '<select name="library_id">';
   foreach ($list->getElementsByTagName('library') as $lib) {
@@ -20,4 +20,4 @@ if (!isset($_GET['library_id'])) {
   exit;
 }
 print luminous::head_html();
-print luminous::highlight('xml', $client->library()->getLibraryById($_GET['library_id'])->saveXML(), FALSE);
+print luminous::highlight('xml', $libraryService->getLibraryById($_GET['library_id'])->saveXML(), FALSE);

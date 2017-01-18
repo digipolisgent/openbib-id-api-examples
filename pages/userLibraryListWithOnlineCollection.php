@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../init.php';
-$client = new OpenBibIdApi\BibConsumer(CONSUMER_KEY, CONSUMER_SECRET, CURRENT_ENV);
+require_once __DIR__ . '/../bootstrap.php';
+$userService = new OpenBibIdApi\Service\UserService($consumer);
 if (!isset($_GET['collection_consumer_key'])) {
-  $list = $client->user()->getUserAvailableOnlineCollections();
+  $list = $userService->getUserAvailableOnlineCollections();
   $form = '<form method="GET" action="/pages/' . basename(__FILE__) . '?' . http_build_query($_GET) . '">';
   $form .= '<select name="collection_consumer_key">';
   foreach ($list->getElementsByTagName('subscription') as $sub) {
@@ -19,4 +19,4 @@ if (!isset($_GET['collection_consumer_key'])) {
   exit;
 }
 print luminous::head_html();
-print luminous::highlight('xml', $client->user()->getUserLibraryListAndOnlineCollection($_GET['collection_consumer_key'])->saveXML(), FALSE);
+print luminous::highlight('xml', $userService->getUserLibraryListAndOnlineCollection($_GET['collection_consumer_key'])->saveXML(), FALSE);

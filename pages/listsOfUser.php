@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../init.php';
-$client = new OpenBibIdApi\BibConsumer(CONSUMER_KEY, CONSUMER_SECRET, CURRENT_ENV);
+require_once __DIR__ . '/../bootstrap.php';
+$listService = new OpenBibIdApi\Service\ListService($consumer);
 print luminous::head_html();
-print luminous::highlight('xml', $client->lists()->getUserLists()->saveXML(), FALSE);
+print luminous::highlight('xml', $listService->getUserLists()->saveXML(), FALSE);

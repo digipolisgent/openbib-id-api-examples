@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../init.php';
-$client = new OpenBibIdApi\BibConsumer(CONSUMER_KEY, CONSUMER_SECRET, CURRENT_ENV);
+require_once __DIR__ . '/../bootstrap.php';
+$listService = new OpenBibIdApi\Service\ListService($consumer);
 if (!isset($_GET['list_id'])) {
-  $list = $client->lists()->getUserLists();
+  $list = $listService->getUserLists();
   $form = '<form method="GET" action="/pages/' . basename(__FILE__) . '?' . http_build_query($_GET) . '">';
   $form .= '<select name="list_id">';
   foreach ($list->getElementsByTagName('list') as $lib) {
@@ -18,9 +18,8 @@ if (!isset($_GET['list_id'])) {
   print $form;
   exit;
 }
-$items = $client->lists()->getListItems($_GET['list_id']);
+$items = $listService->getListItems($_GET['list_id']);
 if (!isset($_GET['item_id'])) {
-
   $form = '<form method="GET" action="/pages/' . basename(__FILE__) . '?' . http_build_query($_GET) . '">';
   $form .= '<select name="item_id">';
   foreach ($items->getElementsByTagName('item') as $item) {
@@ -43,4 +42,4 @@ foreach ($items->getElementsByTagName('item') as $item) {
   }
 }
 print luminous::head_html();
-print luminous::highlight('xml', $client->lists()->getCatalogItems($libId, $_GET['item_id'])->saveXML(), FALSE);
+print luminous::highlight('xml', $listService->getCatalogItems($libId, $_GET['item_id'])->saveXML(), FALSE);
