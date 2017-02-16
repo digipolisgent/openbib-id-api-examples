@@ -16,6 +16,7 @@
     </ul>
     <h2>Gebruikersspecifieke resources</h2>
     <ul>
+      <li><a href="/pages/userAutoLogin.php">Ophalen van autologin url</a></li>
       <li><a href="/pages/userInfo.php">Ophalen van eenvoudige gebruikers informatie</a></li>
       <li><a href="/pages/userProfile.php">Ophalen van een gebruikersprofiel</a></li>
       <li><strong>TODO: </strong><a href="#">Aanpassen van een gebruikersprofiel</a></li>
